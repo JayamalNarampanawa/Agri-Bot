@@ -19,7 +19,7 @@ a {
 
 /* Header */
 .hero-section {
-  background: url('assets/images/1.jpg') no-repeat center center/cover;
+  background: url('assets/images/bg.jpeg') no-repeat center center/cover;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -41,7 +41,7 @@ a {
 
 .overlay h1 {
   font-size: 3rem;
-  color: #4caf50;
+  color: #25b929;
 }
 
 .overlay p {
@@ -52,11 +52,11 @@ a {
 /* Navigation */
 nav {
   background-color: #222;
-  padding: 1rem;
+  padding: 2rem;
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 8px rgba(253, 253, 253, 0.5);
 }
 
 nav ul {
@@ -70,7 +70,7 @@ nav li {
 }
 
 nav a:hover {
-  color: #4caf50;
+  color: #11dc18;
 }
 
 /* Main content */
@@ -117,7 +117,7 @@ main {
   font-size: 1.5rem;
   font-weight: bold;
   margin: auto;
-  box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+  box-shadow: 0 0 15px rgba(61, 183, 65, 0.5);
 }
 
 /* Stylish Toggle Button */
