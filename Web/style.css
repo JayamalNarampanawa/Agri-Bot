@@ -1,0 +1,157 @@
+/* Reset and base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #111;
+  color: #f0f0f0;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: #80cbc4;
+}
+
+/* Header */
+.hero-section {
+  background: url('assets/images/1.jpg') no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: height 0.3s ease;
+}
+
+.hero-section.shrink {
+  height: 60vh;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 2rem 3rem;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.overlay h1 {
+  font-size: 3rem;
+  color: #4caf50;
+}
+
+.overlay p {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+/* Navigation */
+nav {
+  background-color: #222;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+nav li {
+  margin: 0 15px;
+}
+
+nav a:hover {
+  color: #4caf50;
+}
+
+/* Main content */
+main {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.card {
+  background-color: #1c1c1c;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 12px rgba(0, 255, 100, 0.2);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h2 {
+  margin-bottom: 1rem;
+  color: #81c784;
+}
+
+/* Moisture Gauge */
+#gauge-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gauge {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: conic-gradient(#4caf50 0%, #555 0%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: auto;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+}
+
+/* Stylish Toggle Button */
+#toggle-pump {
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
+  color: white;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+#toggle-pump:hover {
+  background: linear-gradient(135deg, #66bb6a, #388e3c);
+}
+
+/* Camera */
+#camera img {
+  border: 3px solid #4caf50;
+  border-radius: 10px;
+  margin-top: 1rem;
+  max-height: 300px;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Footer */
+footer {
+  background-color: #222;
+  padding: 1rem;
+  text-align: center;
+  color: #999;
+  font-size: 0.9rem;
+}
