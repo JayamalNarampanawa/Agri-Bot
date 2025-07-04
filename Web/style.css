@@ -11,7 +11,7 @@ body {
 }
 
 .hero-section {
-  background: url('assets/images/1.jpg') no-repeat center center/cover;
+  background: url('assets/images/bg.jpeg') no-repeat center center/cover;
   height: 100vh;
   position: relative;
   display: flex;
