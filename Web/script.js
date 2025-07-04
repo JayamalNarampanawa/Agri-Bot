@@ -11,19 +11,16 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-// Elements
-const gaugeText = document.getElementById("moisture-value");
-const needle = document.getElementById("needle");
+const moistureGauge = document.getElementById("moisture-gauge");
+const moistureValue = document.getElementById("moisture-value");
 const pumpStatusDisplay = document.getElementById("pump-status");
 const tempDisplay = document.getElementById("temperature");
 const humidityDisplay = document.getElementById("humidity");
 
-// Live data from Firebase
 db.ref("/moisture").on("value", snapshot => {
   const value = snapshot.val();
-  gaugeText.textContent = `${value}%`;
-  const angle = Math.min(180, Math.max(0, (value / 100) * 180));
-  needle.style.transform = `rotate(${angle}deg)`;
+  moistureValue.textContent = value + "%";
+  moistureGauge.style.background = `conic-gradient(#4caf50 0% ${value}%, #444 ${value}% 100%)`;
 });
 
 db.ref("/pump").on("value", snapshot => {
@@ -37,14 +34,13 @@ db.ref("/weather").on("value", snapshot => {
   humidityDisplay.textContent = weather.humidity;
 });
 
-// Toggle Pump
 document.getElementById("toggle-pump").addEventListener("click", () => {
   db.ref("/pump").once("value").then(snapshot => {
-    db.ref("/pump").set(!snapshot.val());
+    const current = snapshot.val();
+    db.ref("/pump").set(!current);
   });
 });
 
-// Shrink header on scroll
 window.addEventListener("scroll", () => {
   const header = document.getElementById("header");
   header.classList.toggle("shrink", window.scrollY > 100);
