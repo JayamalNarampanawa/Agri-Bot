@@ -22,6 +22,7 @@
       <li><a href="#irrigation">Irrigation</a></li>
       <li><a href="#weather">Weather</a></li>
       <li><a href="#camera">Camera</a></li>
+      <li><a href="#about">About Us</a></li>
     </ul>
   </nav>
 
@@ -29,11 +30,7 @@
     <section class="card" id="soil">
       <h2>🌱 Soil Moisture</h2>
       <div class="gauge-container">
-        <div class="gauge" id="moisture-gauge">
-          <div class="needle" id="needle"></div>
-          <div class="gauge-center"></div>
-          <div class="gauge-value" id="moisture-value">--%</div>
-        </div>
+        <canvas id="moistureGauge" width="200" height="200"></canvas>
       </div>
     </section>
 
@@ -45,13 +42,18 @@
 
     <section class="card" id="weather">
       <h2>🌤️ Weather</h2>
-      <p>🌡️ Temperature: <span id="temperature">--</span> °C</p>
-      <p>💧 Humidity: <span id="humidity">--</span> %</p>
+      <p>Temperature: <span id="temperature">--</span> °C</p>
+      <p>Humidity: <span id="humidity">--</span> %</p>
     </section>
 
     <section class="card" id="camera">
       <h2>📹 Live Camera Feed</h2>
       <img src="http://<ESP32-CAM-IP>/stream" alt="Camera Stream" width="100%">
+    </section>
+
+    <section class="about-section" id="about">
+      <h2>🤖 About Us</h2>
+      <p>We are the Agri-Bot team from NIBM, Sri Lanka, working to transform farming through technology. Our project focuses on real-time monitoring and smart irrigation using ESP32 and Firebase to help farmers increase yield and efficiency.</p>
     </section>
   </main>
 
@@ -59,8 +61,11 @@
     <p>&copy; 2025 Agri-Bot Team. All rights reserved.</p>
   </footer>
 
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+  <!-- App Script -->
   <script src="script.js"></script>
 </body>
 </html>
