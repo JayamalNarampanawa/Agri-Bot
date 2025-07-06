@@ -16,6 +16,7 @@ const moistureValue = document.getElementById("moisture-value");
 const pumpStatusDisplay = document.getElementById("pump-status");
 const tempDisplay = document.getElementById("temperature");
 const humidityDisplay = document.getElementById("humidity");
+const motionTimeDisplay = document.getElementById("motion-time");
 
 db.ref("/moisture").on("value", snapshot => {
   const value = snapshot.val();
@@ -30,8 +31,15 @@ db.ref("/pump").on("value", snapshot => {
 
 db.ref("/weather").on("value", snapshot => {
   const weather = snapshot.val();
-  tempDisplay.textContent = weather.temperature;
-  humidityDisplay.textContent = weather.humidity;
+  if (weather) {
+    tempDisplay.textContent = weather.temperature ?? "--";
+    humidityDisplay.textContent = weather.humidity ?? "--";
+  }
+});
+
+db.ref("/security/last_motion").on("value", snapshot => {
+  const timestamp = snapshot.val();
+  motionTimeDisplay.textContent = timestamp || "--";
 });
 
 document.getElementById("toggle-pump").addEventListener("click", () => {

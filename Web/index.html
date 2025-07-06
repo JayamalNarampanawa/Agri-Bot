@@ -17,11 +17,12 @@
 
   <nav>
     <ul>
-      <li><a href="#">Dashboard</a></li>
+      <li><a href="#soil">Dashboard</a></li>
       <li><a href="#soil">Soil Monitoring</a></li>
       <li><a href="#irrigation">Irrigation</a></li>
       <li><a href="#weather">Weather</a></li>
       <li><a href="#camera">Camera</a></li>
+      <li><a href="#security">Security</a></li>
       <li><a href="#about">About Us</a></li>
     </ul>
   </nav>
@@ -55,6 +56,11 @@
       <div class="camera-container">
         <img src="http://<ESP32-CAM-IP>/stream" alt="Camera Stream" />
       </div>
+    </section>
+
+    <section class="card" id="security">
+      <h2>🛡️ Security</h2>
+      <p>Last Motion Detected: <span id="motion-time">--</span></p>
     </section>
 
     <section class="about-card" id="about">
