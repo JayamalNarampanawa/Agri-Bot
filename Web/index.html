@@ -17,7 +17,6 @@
 
   <nav>
     <ul>
-      <li><a href="#soil">Dashboard</a></li>
       <li><a href="#soil">Soil Monitoring</a></li>
       <li><a href="#irrigation">Irrigation</a></li>
       <li><a href="#weather">Weather</a></li>
@@ -60,7 +59,8 @@
 
     <section class="card" id="security">
       <h2>🛡️ Security</h2>
-      <p>Last Motion Detected: <span id="motion-time">--</span></p>
+      <p>Last Motion Detected: <span id="last-motion">--</span></p>
+      <!-- Added debug console log for timestamp -->
     </section>
 
     <section class="about-card" id="about">
@@ -91,6 +91,7 @@
     <p>&copy; 2025 Agri-Bot Team NIBM. All rights reserved.</p>
   </footer>
 
+  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <script src="script.js"></script>

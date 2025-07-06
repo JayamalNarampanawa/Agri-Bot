@@ -16,32 +16,46 @@ const moistureValue = document.getElementById("moisture-value");
 const pumpStatusDisplay = document.getElementById("pump-status");
 const tempDisplay = document.getElementById("temperature");
 const humidityDisplay = document.getElementById("humidity");
-const motionTimeDisplay = document.getElementById("motion-time");
+const lastMotionDisplay = document.getElementById("last-motion");
 
+// Soil moisture listener
 db.ref("/moisture").on("value", snapshot => {
   const value = snapshot.val();
-  moistureValue.textContent = value + "%";
-  moistureGauge.style.background = `conic-gradient(#4caf50 0% ${value}%, #444 ${value}% 100%)`;
+  if (value !== null) {
+    moistureValue.textContent = value + "%";
+    moistureGauge.style.background = `conic-gradient(#4caf50 0% ${value}%, #444 ${value}% 100%)`;
+  } else {
+    moistureValue.textContent = "--%";
+    moistureGauge.style.background = `conic-gradient(#444 0% 100%)`;
+  }
 });
 
+// Pump status listener
 db.ref("/pump").on("value", snapshot => {
   const status = snapshot.val();
   pumpStatusDisplay.textContent = "Pump Status: " + (status ? "ON" : "OFF");
 });
 
+// Weather listener
 db.ref("/weather").on("value", snapshot => {
   const weather = snapshot.val();
   if (weather) {
     tempDisplay.textContent = weather.temperature ?? "--";
     humidityDisplay.textContent = weather.humidity ?? "--";
+  } else {
+    tempDisplay.textContent = "--";
+    humidityDisplay.textContent = "--";
   }
 });
 
-db.ref("/security/last_motion").on("value", snapshot => {
-  const timestamp = snapshot.val();
-  motionTimeDisplay.textContent = timestamp || "--";
+// Security motion timestamp listener with debug
+db.ref("/security/last_motion_time").on("value", snapshot => {
+  const motionTime = snapshot.val();
+  console.log("Motion timestamp from Firebase:", motionTime);  // DEBUG: Check console for this output
+  lastMotionDisplay.textContent = motionTime || "--";
 });
 
+// Pump toggle button logic
 document.getElementById("toggle-pump").addEventListener("click", () => {
   db.ref("/pump").once("value").then(snapshot => {
     const current = snapshot.val();
@@ -49,6 +63,7 @@ document.getElementById("toggle-pump").addEventListener("click", () => {
   });
 });
 
+// Header shrink on scroll effect
 window.addEventListener("scroll", () => {
   const header = document.getElementById("header");
   header.classList.toggle("shrink", window.scrollY > 100);
