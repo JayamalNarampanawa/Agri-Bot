@@ -53,7 +53,8 @@ body {
 
 #heading2 {
   font-size: 48px;
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: #00ff99;
   color: #00ffc8;
   margin-bottom: 10px;
 }
@@ -64,6 +65,14 @@ body {
   color: #ffffff;
 }
 
+.page-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 250px); /* full height minus header space */
+  padding: 20px;
+  box-sizing: border-box;
+}
 
 .wrapper-contactForm {
   width: 40%;
@@ -90,6 +99,7 @@ body {
   font-size: 30px;
   color: #2c3e50;
   font-weight: 600;
+  margin-left: 130px;
   margin-bottom: 20px;
 }
 
