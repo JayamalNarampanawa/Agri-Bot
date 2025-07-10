@@ -13,13 +13,31 @@ FirebaseData firebaseData;
 FirebaseConfig firebaseConfig;
 FirebaseAuth firebaseAuth;
 
-const int sensorPin = A0;
-const int relayPin = D1;
-const int threshold = 40;
+const int sensorPin = A0;    // Soil moisture sensor (analog)
+const int relayPin = D1;     // Relay for pump
+const int lightSensorPin = D5; // HW-072 light sensor digital output
+const int ledPin = D2;         // LED indicator
+
+const int lowerThreshold = 20;  // Pump ON moisture threshold
+const int upperThreshold = 50;  // Pump OFF moisture threshold
+
+bool pumpState = false;  // Track pump status
+bool ledState = false;   // Track LED state
+
+unsigned long previousLightCheck = 0;
+const unsigned long lightCheckInterval = 2UL * 60UL * 60UL * 1000UL; // 4 hours in milliseconds
 
 void setup() {
   Serial.begin(115200);
   delay(1000);
+
+  pinMode(sensorPin, INPUT);
+  pinMode(relayPin, OUTPUT);
+  pinMode(lightSensorPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+
+  digitalWrite(relayPin, LOW);
+  digitalWrite(ledPin, LOW);
 
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("Connecting to WiFi");
@@ -40,12 +58,12 @@ void setup() {
 
   Serial.println("Firebase initialized");
 
-  pinMode(sensorPin, INPUT);
-  pinMode(relayPin, OUTPUT);
-  digitalWrite(relayPin, LOW);
+  // Initial light check time
+  previousLightCheck = millis() - lightCheckInterval;  // So first check runs immediately
 }
 
 void loop() {
+  // Soil moisture reading
   int rawValue = analogRead(sensorPin);
   int moisture = map(rawValue, 1024, 300, 0, 100);
   moisture = constrain(moisture, 0, 100);
@@ -53,20 +71,48 @@ void loop() {
   Serial.print("Moisture: ");
   Serial.println(moisture);
 
+  // Send moisture to Firebase
   if (Firebase.setInt(firebaseData, "/moisture", moisture)) {
-    Serial.println("✅ Data sent to Firebase");
+    Serial.println("✅ Moisture data sent to Firebase");
   } else {
-    Serial.print("❌ Firebase error: ");
+    Serial.print("❌ Firebase moisture error: ");
     Serial.println(firebaseData.errorReason());
   }
 
-  if (moisture < threshold) {
-    digitalWrite(relayPin, HIGH);
+  // Pump control logic
+  if (!pumpState && moisture < lowerThreshold) {
+    digitalWrite(relayPin, HIGH);  // Turn ON pump
+    pumpState = true;
     Serial.println("💧 Soil is dry → Pump ON");
-  } else {
-    digitalWrite(relayPin, LOW);
-    Serial.println("🌱 Soil is wet → Pump OFF");
+    Firebase.setBool(firebaseData, "/pump", true);
+  } else if (pumpState && moisture >= upperThreshold) {
+    digitalWrite(relayPin, LOW);  // Turn OFF pump
+    pumpState = false;
+    Serial.println("🌱 Soil is wet enough → Pump OFF");
+    Firebase.setBool(firebaseData, "/pump", false);
   }
 
-  delay(5000);
+  // Check light sensor every 4 hours
+  if (millis() - previousLightCheck >= lightCheckInterval) {
+    previousLightCheck = millis();
+
+    bool isDark = (digitalRead(lightSensorPin) == LOW); // Assuming LOW means dark
+
+    // LED ON if dark, OFF if light
+    digitalWrite(ledPin, isDark ? HIGH : LOW);
+    ledState = isDark;
+
+    Serial.print("Light sensor: ");
+    Serial.println(isDark ? "Dark" : "Light");
+
+    // Send light state to Firebase
+    if (Firebase.setBool(firebaseData, "/isDark", isDark)) {
+      Serial.println("✅ Light data sent to Firebase");
+    } else {
+      Serial.print("❌ Firebase light error: ");
+      Serial.println(firebaseData.errorReason());
+    }
+  }
+
+  delay(5000); // Main loop delay to reduce CPU usage
 }

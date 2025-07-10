@@ -17,6 +17,7 @@ const pumpStatusDisplay = document.getElementById("pump-status");
 const tempDisplay = document.getElementById("temperature");
 const humidityDisplay = document.getElementById("humidity");
 const lastMotionDisplay = document.getElementById("last-motion");
+const lightStatusDisplay = document.getElementById("light-status");
 
 // Soil moisture listener
 db.ref("/moisture").on("value", snapshot => {
@@ -53,6 +54,18 @@ db.ref("/security/last_motion_time").on("value", snapshot => {
   const motionTime = snapshot.val();
   console.log("Motion timestamp from Firebase:", motionTime);  // DEBUG: Check console for this output
   lastMotionDisplay.textContent = motionTime || "--";
+});
+
+// Light sensor listener (added)
+db.ref("/isDark").on("value", snapshot => {
+  const isDark = snapshot.val();
+  if (isDark === true) {
+    lightStatusDisplay.textContent = "Dark 🌙";
+  } else if (isDark === false) {
+    lightStatusDisplay.textContent = "Light ☀️";
+  } else {
+    lightStatusDisplay.textContent = "--";
+  }
 });
 
 // Pump toggle button logic
