@@ -35,6 +35,10 @@ body {
   100% { transform: rotate(360deg); }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .hero-section {
   background: url('assets/images/bg.jpeg') no-repeat center center/cover;
   height: 100vh;
