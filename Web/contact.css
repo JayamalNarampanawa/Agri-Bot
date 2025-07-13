@@ -152,7 +152,7 @@ body {
 }
 
 .inputBox input[type="submit"]:hover {
-  background-color: #009970;
+  background-color: #10cc0a;
 }
 
 @media (max-width: 900px) {
