@@ -3,6 +3,8 @@ body {
   margin: 0;
   padding: 0;
   background: linear-gradient(to right, #0f2027, #121212, #121212);
+  background: url(assets/images/agri-bot_logo.png);
+  background-size:cover;
   overflow-x: hidden;
 }
 
@@ -46,6 +48,7 @@ body {
   text-align: center;
   padding: 40px 20px;
   margin: 40px auto 20px;
+  backdrop-filter: blur(30px);
   background: rgba(255, 255, 255, 0.05);
   border: 2px solid #1eff00; /* ✨ Border color */
   border-radius: 50px;
@@ -72,6 +75,11 @@ body {
   color: #ffffff;
 }
 
+#heading3:hover{
+  color: rgb(0, 255, 0);
+  text-shadow: 0 0 10px #00ff2a;
+}
+
 .page-center {
   display: flex;
   justify-content: center;
@@ -84,6 +92,8 @@ body {
 .wrapper-contactForm {
   width: 40%;
   background: #ffffff;
+  background: transparent;
+  backdrop-filter: blur(30px);
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 0 30px rgba(0, 255, 128, 0.3);
@@ -96,6 +106,7 @@ body {
     opacity: 0;
     transform: translateX(100px);
   }
+  
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -104,7 +115,7 @@ body {
 
 .wrapper-contactForm h2 {
   font-size: 30px;
-  color: #2c3e50;
+  color: #ffffff;
   font-weight: 600;
   margin-left: 130px;
   margin-bottom: 20px;
@@ -117,7 +128,7 @@ body {
 
 .inputBox input,
 .inputBox textarea {
-  width: 100%;
+  width: 95%;
   padding: 14px 10px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -153,6 +164,14 @@ body {
 
 .inputBox input[type="submit"]:hover {
   background-color: #10cc0a;
+}
+
+footer {
+  background: #111;
+  text-align: center;
+  padding: 2rem;
+  color: #777;
+  margin-top: 3rem;
 }
 
 @media (max-width: 900px) {
