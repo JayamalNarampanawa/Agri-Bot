@@ -25,7 +25,7 @@ bool pumpState = false;
 bool ledState = false;
 
 unsigned long previousLightCheck = 0;
-const unsigned long lightCheckInterval = 60000UL; // 1 minute = 60,000 milliseconds
+const unsigned long lightCheckInterval = 1000UL; // 1 minute = 60s = 60,000 milliseconds
 
 void setup() {
   Serial.begin(115200);
