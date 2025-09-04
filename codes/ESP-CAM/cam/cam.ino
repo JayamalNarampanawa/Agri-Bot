@@ -1,50 +1,56 @@
-#include <Wire.h>
-#include <Adafruit_PWMServoDriver.h>
+// Motor test for L298N + 4 motors (2 per side)
 
-Adafruit_PWMServoDriver srituhobby = Adafruit_PWMServoDriver();
+#define ENA 5   // Left PWM
+#define IN1 8
+#define IN2 9
+#define IN3 10
+#define IN4 11
+#define ENB 6   // Right PWM
 
-#define servo1 0
-#define servo2 1
-#define servo3 2
-#define servo4 3
+const int PWM_SPEED = 120;  // Adjust to safe slow speed
 
 void setup() {
-  Serial.begin(9600);
-  srituhobby.begin();
-  srituhobby.setPWMFreq(60);  // Standard servo frequency
+  pinMode(ENA, OUTPUT);
+  pinMode(ENB, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
 
-  Serial.println("Starting servo test...");
-  delay(1000);
+  Serial.begin(9600);
+  Serial.println("Motor test starting...");
+}
+
+void setLeft(int pwm, bool forward) {
+  analogWrite(ENA, pwm);
+  if (forward) { digitalWrite(IN1, HIGH); digitalWrite(IN2, LOW); }
+  else         { digitalWrite(IN1, LOW);  digitalWrite(IN2, HIGH); }
+}
+
+void setRight(int pwm, bool forward) {
+  analogWrite(ENB, pwm);
+  if (forward) { digitalWrite(IN3, HIGH); digitalWrite(IN4, LOW); }
+  else         { digitalWrite(IN3, LOW);  digitalWrite(IN4, HIGH); }
 }
 
 void loop() {
-  testServo(servo1, 330, 450, 10);
-  testServo(servo2, 150, 380, 10);
-  testServo(servo3, 300, 380, 10);
-  testServo(servo4, 410, 510, 10);
+  Serial.println("FORWARD...");
+  setLeft(PWM_SPEED, true);
+  setRight(PWM_SPEED, true);
+  delay(2000);
 
-  Serial.println("All servos tested. Looping again...");
-  delay(2000);  // Wait before repeating test
-}
+  Serial.println("STOP...");
+  setLeft(0, true);
+  setRight(0, true);
+  delay(1000);
 
-// Function to test a single servo
-void testServo(int servoNum, int start, int end, int stepDelay) {
-  Serial.print("Testing servo ");
-  Serial.println(servoNum);
+  Serial.println("BACKWARD...");
+  setLeft(PWM_SPEED, false);
+  setRight(PWM_SPEED, false);
+  delay(2000);
 
-  // Move from start to end
-  for (int pos = start; pos <= end; pos++) {
-    srituhobby.setPWM(servoNum, 0, pos);
-    delay(stepDelay);
-  }
-
-  // Move back from end to start
-  for (int pos = end; pos >= start; pos--) {
-    srituhobby.setPWM(servoNum, 0, pos);
-    delay(stepDelay);
-  }
-
-  Serial.print("Servo ");
-  Serial.print(servoNum);
-  Serial.println(" test done.\n");
+  Serial.println("STOP...");
+  setLeft(0, true);
+  setRight(0, true);
+  delay(2000);
 }

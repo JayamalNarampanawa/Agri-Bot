@@ -1,186 +1,56 @@
-body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to right, #0f2027, #121212, #121212);
-  background: url(assets/images/agri-bot_logo.png);
-  background-size:cover;
-  overflow-x: hidden;
+/* Custom styles for contact page */
+html {
+  scroll-behavior: smooth;
 }
 
-.loader-wrapper {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.loader {
-  border: 8px solid #f3f3f3;
-  border-top: 8px solid #00ff99;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 40px 60px;
-  flex-wrap: wrap;
-  position: relative;
-}
-
-.wrapper {
-  width: 100%;
-  max-width: 520px;
-  text-align: center;
-  padding: 40px 20px;
-  margin: 40px auto 20px;
-  backdrop-filter: blur(30px);
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid #1eff00; /* ✨ Border color */
-  border-radius: 50px;
-  box-shadow: 0 0 25px rgb(0, 255, 64);
-  transition: all 0.3s ease;
-}
-
-.wrapper:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 35px rgba(0, 255, 200, 0.4);
-}
-
-#heading2 {
-  font-size: 48px;
-  font-weight: 700;
-  box-shadow: #00ff37;
-  color: #00ff40;
-  margin-bottom: 10px;
-}
-
-#heading3 {
-  font-size: 16px;
-  font-weight: 400;
-  color: #ffffff;
-}
-
-#heading3:hover{
-  color: rgb(0, 255, 0);
-  text-shadow: 0 0 10px #00ff2a;
-}
-
-.page-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 250px); /* full height minus header space */
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.wrapper-contactForm {
-  width: 40%;
-  background: #ffffff;
-  background: transparent;
-  backdrop-filter: blur(30px);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 0 30px rgba(0, 255, 128, 0.3);
-  animation: slideInRight 1.2s ease-out forwards;
-  opacity: 0;
-}
-
-@keyframes slideInRight {
-  0% {
+/* Custom form animations */
+@keyframes slideInUp {
+  from {
     opacity: 0;
-    transform: translateX(100px);
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideInUp 0.6s ease-out forwards;
+}
+
+/* Custom scrollbar for contact page */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #22c55e, #16a34a);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #16a34a, #15803d);
+}
+
+/* Form focus effects */
+.form-input:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.15);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .text-6xl {
+    font-size: 3rem;
   }
   
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.wrapper-contactForm h2 {
-  font-size: 30px;
-  color: #ffffff;
-  font-weight: 600;
-  margin-left: 130px;
-  margin-bottom: 20px;
-}
-
-.inputBox {
-  position: relative;
-  margin-bottom: 25px;
-}
-
-.inputBox input,
-.inputBox textarea {
-  width: 95%;
-  padding: 14px 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: #f8f8f8;
-  color: #333;
-  outline: none;
-  transition: 0.3s ease;
-}
-
-.inputBox span {
-  position: absolute;
-  left: 12px;
-  top: 12px;
-  color: #888;
-  font-size: 16px;
-  pointer-events: none;
-  transition: 0.3s ease all;
-  background-color: #fff;
-  padding: 0 4px;
-}
-
-.inputBox input:focus ~ span,
-.inputBox input:valid ~ span,
-.inputBox textarea:focus ~ span,
-.inputBox textarea:valid ~ span {
-  top: -10px;
-  left: 8px;
-  font-size: 12px;
-  color: #00c292;
-  background: #fff;
-}
-
-.inputBox input[type="submit"]:hover {
-  background-color: #10cc0a;
-}
-
-footer {
-  background: #111;
-  text-align: center;
-  padding: 2rem;
-  color: #777;
-  margin-top: 3rem;
-}
-
-@media (max-width: 900px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-  }
-  .wrapper, .wrapper-contactForm {
-    width: 90%;
-    margin-bottom: 40px;
+  .px-12 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
