@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - Agri-Bot</title>
+  <link rel="icon" href="assets/images/agri-bot_logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            'inter': ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            },
+            dark: {
+              50: '#f8fafc',
+              100: '#f1f5f9',
+              200: '#e2e8f0',
+              300: '#cbd5e1',
+              400: '#94a3b8',
+              500: '#64748b',
+              600: '#475569',
+              700: '#334155',
+              800: '#1e293b',
+              900: '#0f172a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="contact.css" />
+</head>
+
+<body class="font-inter bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 text-white min-h-screen">
+  <!-- Loader -->
+  <div
+    class="loader-wrapper fixed inset-0 bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center z-50">
+    <div class="relative">
+      <div class="w-16 h-16 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin"></div>
+      <div class="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-primary-400 rounded-full animate-spin"
+        style="animation-delay: -0.15s;"></div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-6 left-1/2 transform -translate-x-1/2 z-40 w-full max-w-6xl px-6">
+    <div class="backdrop-blur-xl bg-dark-800/80 border border-primary-500/20 rounded-2xl px-8 py-4 shadow-2xl">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <div class="relative">
+            <img src="assets/images/agri-bot_logo.png" alt="Agri-Bot Logo"
+              class="w-12 h-12 rounded-full border-2 border-primary-500 shadow-lg" />
+            <div class="absolute -inset-1 bg-primary-500/20 rounded-full blur animate-pulse"></div>
+          </div>
+          <span
+            class="text-2xl font-bold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
+            Agri-Bot
+          </span>
+        </div>
+        <a href="index.html"
+          class="px-6 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl hover:from-primary-600 hover:to-primary-700 transition-all duration-300 font-medium shadow-lg">
+          Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <div class="pt-32 pb-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <div class="backdrop-blur-xl bg-white/5 border border-primary-500/20 rounded-3xl p-12 shadow-2xl">
+        <h2
+          class="text-6xl font-bold bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 bg-clip-text text-transparent mb-6">
+          Contact Us
+        </h2>
+        <p class="text-xl text-gray-300 leading-relaxed">
+          Thank you for using the Agri-Bot Smart Farming System.<br>
+          For inquiries, support, or feedback, feel free to reach out to us:
+        </p>
+        <div class="mt-8 flex justify-center space-x-2">
+          <div class="w-3 h-3 bg-primary-500 rounded-full animate-bounce"></div>
+          <div class="w-3 h-3 bg-primary-400 rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
+          <div class="w-3 h-3 bg-primary-300 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Form -->
+  <div class="max-w-2xl mx-auto px-6 pb-20">
+    <div
+      class="backdrop-blur-xl bg-gradient-to-br from-dark-800/80 to-dark-700/60 border border-primary-500/20 rounded-3xl p-12 shadow-2xl">
+      <form class="space-y-8">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold text-white mb-2">Send Us a Message</h2>
+          <div class="w-20 h-1 bg-gradient-to-r from-primary-400 to-primary-600 rounded-full mx-auto"></div>
+        </div>
+
+        <div class="space-y-6">
+          <div class="relative group">
+            <input type="text" required
+              class="w-full px-6 py-4 bg-dark-800/50 border border-gray-600 rounded-2xl text-white placeholder-transparent focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 peer"
+              placeholder="Full Name" />
+            <label
+              class="absolute left-6 -top-3 bg-dark-800 px-2 text-sm text-primary-400 transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-4 peer-placeholder-shown:bg-transparent peer-focus:-top-3 peer-focus:text-primary-400 peer-focus:text-sm peer-focus:bg-dark-800">
+              Full Name
+            </label>
+          </div>
+
+          <div class="relative group">
+            <input type="email" required
+              class="w-full px-6 py-4 bg-dark-800/50 border border-gray-600 rounded-2xl text-white placeholder-transparent focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 peer"
+              placeholder="Email" />
+            <label
+              class="absolute left-6 -top-3 bg-dark-800 px-2 text-sm text-primary-400 transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-4 peer-placeholder-shown:bg-transparent peer-focus:-top-3 peer-focus:text-primary-400 peer-focus:text-sm peer-focus:bg-dark-800">
+              Email Address
+            </label>
+          </div>
+
+          <div class="relative group">
+            <input type="tel" required
+              class="w-full px-6 py-4 bg-dark-800/50 border border-gray-600 rounded-2xl text-white placeholder-transparent focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 peer"
+              placeholder="Phone Number" />
+            <label
+              class="absolute left-6 -top-3 bg-dark-800 px-2 text-sm text-primary-400 transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-4 peer-placeholder-shown:bg-transparent peer-focus:-top-3 peer-focus:text-primary-400 peer-focus:text-sm peer-focus:bg-dark-800">
+              Phone Number
+            </label>
+          </div>
+
+          <div class="relative group">
+            <textarea required rows="6"
+              class="w-full px-6 py-4 bg-dark-800/50 border border-gray-600 rounded-2xl text-white placeholder-transparent focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 peer resize-none"
+              placeholder="Your Message..."></textarea>
+            <label
+              class="absolute left-6 -top-3 bg-dark-800 px-2 text-sm text-primary-400 transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-4 peer-placeholder-shown:bg-transparent peer-focus:-top-3 peer-focus:text-primary-400 peer-focus:text-sm peer-focus:bg-dark-800">
+              Your Message
+            </label>
+          </div>
+
+          <button type="submit"
+            class="w-full py-4 px-8 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white rounded-2xl font-semibold text-lg shadow-lg hover:shadow-primary-500/25 transition-all duration-300 transform hover:scale-105">
+            Send Message
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="py-12 bg-gradient-to-r from-dark-900 to-dark-800 border-t border-primary-500/20">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <div class="flex items-center justify-center space-x-4 mb-6">
+        <img src="assets/images/agri-bot_logo.png" alt="Agri-Bot Logo"
+          class="w-10 h-10 rounded-full border-2 border-primary-500" />
+        <span class="text-2xl font-bold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
+          Agri-Bot
+        </span>
+      </div>
+      <p class="text-gray-400 text-lg">&copy; 2025 Agri-Bot Team NIBM. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener("load", () => {
+      const loader = document.querySelector(".loader-wrapper");
+      loader.style.opacity = "0";
+      loader.style.transition = "opacity 2s ease";
+      setTimeout(() => loader.style.display = "none", 700);
+    });
+  </script>
+</body>
+
+</html>

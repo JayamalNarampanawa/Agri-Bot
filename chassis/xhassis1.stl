@@ -1,0 +1,262 @@
+// Agri-Bot 2-layer chassis with mounting holes for components
+
+chassis_length = 200;  // width (side)
+chassis_depth = 300;   // front/back
+border_thickness = 10; // wall thickness
+layer_height = 40;     // layer height
+screw_hole_dia = 4;    // for mounting screws
+motor_hole_dia = 10;   // motor wire holes
+
+// Module: mounting hole for Arduino R3 on bottom layer
+// Arduino R3 hole pattern approx 70 x 45 mm
+module arduino_mount(z_offset=0) {
+    arduino_w = 70;
+    arduino_d = 45;
+    // Place near bottom-left corner on bottom layer
+    base_x = 20;
+    base_y = 50;
+    for (x=[0, arduino_w])
+        for (y=[0, arduino_d])
+            translate([base_x + x, base_y + y, z_offset])
+                cylinder(h=border_thickness + 5, d=screw_hole_dia, center=true);
+}
+
+// Module: mounting hole for L298N driver on bottom layer
+// Approx 43 x 43 mm hole spacing
+module l298n_mount(z_offset=0) {
+    l298n_size = 43;
+    base_x = chassis_length - 70; // place near bottom-right corner
+    base_y = 50;
+    for (x=[0, l298n_size])
+        for (y=[0, l298n_size])
+            translate([base_x + x, base_y + y, z_offset])
+                cylinder(h=border_thickness + 5, d=screw_hole_dia, center=true);
+}
+
+// Module: 4 motor mounting holes + wire holes (on bottom layer)
+// Motors placed near corners (approx 20mm inset)
+module motor_mount_and_wire_holes(z_offset=0) {
+    // motor mounting holes are usually larger, let's assume 6mm holes near each motor
+    motor_mount_dia = 6;
+    motor_positions = [
+        [20, 20],
+        [chassis_length - 20, 20],
+        [20, chassis_depth - 20],
+        [chassis_length - 20, chassis_depth - 20]
+    ];
+    for (i = [0 : len(motor_positions) - 1]) {
+        pos = motor_positions[i];
+        translate([pos[0], pos[1], z_offset])
+            cylinder(h=border_thickness + 5, d=motor_mount_dia, center=true);
+        // wire hole (10mm dia) just next to motor mounting hole
+        translate([pos[0] + 10, pos[1], z_offset])
+            cylinder(h=border_thickness + 5, d=motor_hole_dia);
+    }
+}
+
+// Module: mounting hole for ESP32 Dev Board (top layer)
+// Approx 68 x 25 mm hole spacing
+module esp32_mount(z_offset=layer_height + 20) {
+    esp32_w = 68;
+    esp32_d = 25;
+    base_x = 30;
+    base_y = 50;
+    for (x=[0, esp32_w])
+        for (y=[0, esp32_d])
+            translate([base_x + x, base_y + y, z_offset])
+                cylinder(h=border_thickness + 5, d=screw_hole_dia, center=true);
+}
+
+// Module: mounting hole for ESP32-CAM + servo mount (top layer)
+// Base block already defined; add mounting holes at base corners
+module esp32_cam_mount(z_offset=layer_height + 20) {
+    base_x = 20;
+    base_y = chassis_depth - 60;
+    base_w = 20;
+    base_d = 40;
+    hole_offset = 5; // inside edges
+    for (x=[hole_offset, base_w - hole_offset])
+        for (y=[hole_offset, base_d - hole_offset])
+            translate([base_x + x, base_y + y, z_offset])
+                cylinder(h=border_thickness + 5, d=screw_hole_dia, center=true);
+}
+
+// Module: mounting hole for 16x2 LCD (top layer)
+// LCD approx 80 x 20 mm footprint, place near front-center of top layer
+module lcd_mount(z_offset=layer_height + 20) {
+    lcd_w = 80;
+    lcd_d = 20;
+    base_x = chassis_length / 2 - lcd_w / 2;
+    base_y = chassis_depth - 40;
+    hole_offset = 5;
+    for (x=[hole_offset, lcd_w - hole_offset])
+        for (y=[hole_offset, lcd_d - hole_offset])
+            translate([base_x + x, base_y + y, z_offset])
+                cylinder(h=border_thickness + 5, d=screw_hole_dia, center=true);
+}
+
+// Module: mounting hole for relay module (top layer)
+// Approx 50 x 25 mm spacing
+module relay_mount(z_offset=layer_height + 20) {
+    relay_w = 50;
+    relay_d = 25;
+    base_x = chassis_length - 80;
+    base_y = 40;
+    for (x=[0, relay_w])
+        for (y=[0, relay_d])
+            translate([base_x + x, base_y + y, z_offset])
+                cylinder(h=border_thickness + 5, d=screw_hole_dia, center=true);
+}
+
+// Module: mounting hole for PIR sensor (top layer)
+// Approx 30x30 mm, place near front-left top
+module pir_mount(z_offset=layer_height + 20) {
+    base_x = 20;
+    base_y = 20;
+    pir_w = 30;
+    pir_d = 30;
+    for (x=[0, pir_w])
+        for (y=[0, pir_d])
+            translate([base_x + x, base_y + y, z_offset])
+                cylinder(h=border_thickness + 5, d=screw_hole_dia, center=true);
+}
+
+// Module: mounting hole for DHT11 sensor (top layer)
+// Small 20x20 mm area near PIR sensor
+module dht11_mount(z_offset=layer_height + 20) {
+    base_x = 60;
+    base_y = 20;
+    size = 20;
+    for (x=[0, size])
+        for (y=[0, size])
+            translate([base_x + x, base_y + y, z_offset])
+                cylinder(h=border_thickness + 5, d=screw_hole_dia, center=true);
+}
+
+// Module: mounting hole for breadboard (top layer)
+// Full size breadboard approx 55 x 165 mm
+module breadboard_mount(z_offset=layer_height + 20) {
+    bb_w = 165;
+    bb_d = 55;
+    base_x = 70;
+    base_y = chassis_depth / 2 - bb_d / 2;
+    hole_offset = 10;
+    // 4 holes near corners
+    corners = [
+        [hole_offset, hole_offset],
+        [bb_w - hole_offset, hole_offset],
+        [hole_offset, bb_d - hole_offset],
+        [bb_w - hole_offset, bb_d - hole_offset]
+    ];
+    for (i = [0 : len(corners) - 1]) {
+        c = corners[i];
+        translate([base_x + c[0], base_y + c[1], z_offset])
+            cylinder(h=border_thickness + 5, d=screw_hole_dia, center=true);
+    }
+}
+
+// Module: mounting hole for battery holder (top layer)
+// 2x18650 battery holder approx 70 x 20 mm, place near top-left
+module battery_mount(z_offset=layer_height + 20) {
+    base_x = 20;
+    base_y = chassis_depth / 2 + 50;
+    bh_w = 70;
+    bh_d = 20;
+    hole_offset = 5;
+    for (x=[hole_offset, bh_w - hole_offset])
+        for (y=[hole_offset, bh_d - hole_offset])
+            translate([base_x + x, base_y + y, z_offset])
+                cylinder(h=border_thickness + 5, d=screw_hole_dia, center=true);
+}
+
+// Module: mounting hole for light sensor LM393 (top layer)
+// Small module, approx 30 x 20 mm, place near battery holder
+module light_sensor_mount(z_offset=layer_height + 20) {
+    base_x = 20;
+    base_y = chassis_depth / 2 + 80;
+    w = 30;
+    d = 20;
+    for (x=[0, w])
+        for (y=[0, d])
+            translate([base_x + x, base_y + y, z_offset])
+                cylinder(h=border_thickness + 5, d=screw_hole_dia, center=true);
+}
+
+module open_box_layer(z_offset = 0) {
+    difference() {
+        union() {
+            // Bottom plate
+            translate([0, 0, z_offset])
+                cube([chassis_length, chassis_depth, border_thickness]);
+            // Front wall
+            translate([0, 0, z_offset])
+                cube([chassis_length, border_thickness, layer_height]);
+            // Back wall
+            translate([0, chassis_depth - border_thickness, z_offset])
+                cube([chassis_length, border_thickness, layer_height]);
+            // Left wall
+            translate([0, 0, z_offset])
+                cube([border_thickness, chassis_depth, layer_height]);
+            // Right wall
+            translate([chassis_length - border_thickness, 0, z_offset])
+                cube([border_thickness, chassis_depth, layer_height]);
+        }
+        ultrasonic_cutouts(z_offset);
+    }
+}
+
+module ultrasonic_cutouts(z_offset = 0) {
+    cutout_width = 23;
+    cutout_height = 16;
+
+    // Front wall cutout
+    translate([chassis_length / 2 - cutout_width / 2, 0, z_offset + 12])
+        cube([cutout_width, 2, cutout_height]);
+
+    // Back wall cutout
+    translate([chassis_length / 2 - cutout_width / 2, chassis_depth - 2, z_offset + 12])
+        cube([cutout_width, 2, cutout_height]);
+}
+
+module cam_servo_mount() {
+    base_w = 20;
+    base_d = 40;
+    base_h = 40;
+
+    difference() {
+        translate([20, chassis_depth - 60, layer_height + 20])
+            cube([base_w, base_d, base_h]);
+        translate([25, chassis_depth - 40, layer_height + 30])
+            rotate([90,0,0])
+                cylinder(h = 20, d = 5, center = true);
+    }
+}
+
+module lcd_cutout() {
+    translate([chassis_length/2 - 40, chassis_depth - 2, layer_height + 30])
+        cube([80, 2, 20]);
+}
+
+module chassis() {
+    // Bottom layer: chassis walls + ultrasonic cutouts + bottom mounts
+    open_box_layer(0);
+    arduino_mount(0);
+    l298n_mount(0);
+    motor_mount_and_wire_holes(0);
+
+    // Top layer: chassis walls + mounts + cutouts + modules
+    open_box_layer(layer_height + 20);
+    esp32_mount(layer_height + 20);
+    esp32_cam_mount(layer_height + 20);
+    lcd_mount(layer_height + 20);
+    relay_mount(layer_height + 20);
+    pir_mount(layer_height + 20);
+    dht11_mount(layer_height + 20);
+    breadboard_mount(layer_height + 20);
+    battery_mount(layer_height + 20);
+    light_sensor_mount(layer_height + 20);
+    cam_servo_mount();
+    lcd_cutout();
+}
+
+chassis();

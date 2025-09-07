@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" class="dark"></html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agri-Bot Dashboard</title>
+  <link rel="icon" href="assets/images/agri-bot_logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            'inter': ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            },
+            dark: {
+              50: '#f8fafc',
+              100: '#f1f5f9',
+              200: '#e2e8f0',
+              300: '#cbd5e1',
+              400: '#94a3b8',
+              500: '#64748b',
+              600: '#475569',
+              700: '#334155',
+              800: '#1e293b',
+              900: '#0f172a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="font-inter bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 text-white min-h-screen">
+  <!-- Loader -->
+  <div class="loader-wrapper fixed inset-0 bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center z-50">
+    <div class="relative">
+      <div class="w-16 h-16 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin"></div>
+      <div class="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-primary-400 rounded-full animate-spin" style="animation-delay: -0.15s;"></div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <header class="relative min-h-screen flex items-center justify-center overflow-hidden" id="header">
+    <div class="absolute inset-0 bg-gradient-to-br from-dark-900/90 via-dark-800/80 to-primary-900/20"></div>
+    <div class="absolute inset-0 bg-[url('assets/images/bg.jpeg')] bg-cover bg-center opacity-30"></div>
+    
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary-500/10 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-primary-400/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+    </div>
+    
+    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+      <div class="backdrop-blur-xl bg-white/5 border border-primary-500/20 rounded-3xl p-12 shadow-2xl">
+        <h1 class="text-6xl md:text-7xl font-bold bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 bg-clip-text text-transparent mb-6 animate-pulse">
+          Agri-Bot Dashboard
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 font-medium">
+          Real-time smart farming control system
+        </p>
+        <div class="mt-8 flex justify-center space-x-2">
+          <div class="w-3 h-3 bg-primary-500 rounded-full animate-bounce"></div>
+          <div class="w-3 h-3 bg-primary-400 rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
+          <div class="w-3 h-3 bg-primary-300 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Navigation -->
+  <nav class="fixed top-6 left-1/2 transform -translate-x-1/2 z-40 w-full max-w-6xl px-6" id="nav_bar">
+    <div class="backdrop-blur-xl bg-dark-800/80 border border-primary-500/20 rounded-2xl px-8 py-4 shadow-2xl">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <div class="relative">
+            <img src="assets/images/agri-bot_logo.png" alt="Agri-Bot Logo" class="w-12 h-12 rounded-full border-2 border-primary-500 shadow-lg" />
+            <div class="absolute -inset-1 bg-primary-500/20 rounded-full blur animate-pulse"></div>
+          </div>
+          <span class="text-2xl font-bold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
+            Agri-Bot
+          </span>
+        </div>
+        
+        <ul class="hidden md:flex items-center space-x-1">
+          <li><a href="#soil" class="px-4 py-2 rounded-xl text-gray-300 hover:text-primary-400 hover:bg-primary-500/10 transition-all duration-300 font-medium">🌱 Soil</a></li>
+          <li><a href="#irrigation" class="px-4 py-2 rounded-xl text-gray-300 hover:text-primary-400 hover:bg-primary-500/10 transition-all duration-300 font-medium">💧 Irrigation</a></li>
+          <li><a href="#weather" class="px-4 py-2 rounded-xl text-gray-300 hover:text-primary-400 hover:bg-primary-500/10 transition-all duration-300 font-medium">🌤️ Weather</a></li>
+          <li><a href="#light" class="px-4 py-2 rounded-xl text-gray-300 hover:text-primary-400 hover:bg-primary-500/10 transition-all duration-300 font-medium">💡 Light</a></li>
+          <li><a href="#camera" class="px-4 py-2 rounded-xl text-gray-300 hover:text-primary-400 hover:bg-primary-500/10 transition-all duration-300 font-medium">📹 Camera</a></li>
+          <li><a href="#security" class="px-4 py-2 rounded-xl text-gray-300 hover:text-primary-400 hover:bg-primary-500/10 transition-all duration-300 font-medium">🛡️ Security</a></li>
+          <li><a href="#about" class="px-4 py-2 rounded-xl text-gray-300 hover:text-primary-400 hover:bg-primary-500/10 transition-all duration-300 font-medium">👩‍💻 About</a></li>
+          <li><a href="ContactUs.html" class="px-6 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl hover:from-primary-600 hover:to-primary-700 transition-all duration-300 font-medium shadow-lg">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-6 py-12 space-y-8">
+    <!-- Soil Moisture Card -->
+    <section class="group backdrop-blur-xl bg-gradient-to-br from-dark-800/80 to-dark-700/60 border border-primary-500/20 rounded-3xl p-8 shadow-2xl hover:shadow-primary-500/10 transition-all duration-500 hover:scale-[1.02]" id="soil">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold text-white flex items-center space-x-3">
+          <span class="text-4xl">🌱</span>
+          <span>Soil Moisture</span>
+        </h2>
+        <div class="px-4 py-2 bg-primary-500/20 text-primary-400 rounded-full text-sm font-medium">
+          Live Data
+        </div>
+      </div>
+      
+      <div class="flex items-center justify-center">
+        <div class="relative">
+          <div class="w-48 h-48 rounded-full bg-gradient-to-br from-dark-700 to-dark-800 shadow-inner flex items-center justify-center" id="moisture-gauge">
+            <div class="w-40 h-40 rounded-full bg-dark-900 flex items-center justify-center shadow-2xl">
+              <div class="text-center">
+                <div class="text-4xl font-bold text-primary-400" id="moisture-value">--%</div>
+                <div class="text-sm text-gray-400 mt-1">Moisture</div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -inset-2 bg-gradient-to-r from-primary-500/20 to-primary-400/20 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Irrigation Card -->
+    <section class="group backdrop-blur-xl bg-gradient-to-br from-dark-800/80 to-dark-700/60 border border-primary-500/20 rounded-3xl p-8 shadow-2xl hover:shadow-primary-500/10 transition-all duration-500 hover:scale-[1.02]" id="irrigation">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold text-white flex items-center space-x-3">
+          <span class="text-4xl">💧</span>
+          <span>Water Pump</span>
+        </h2>
+      </div>
+      
+      <div class="space-y-6">
+        <button id="toggle-pump" class="w-full py-4 px-8 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-2xl font-semibold text-lg shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105">
+          Toggle Pump
+        </button>
+        <div class="text-center">
+          <p id="pump-status" class="text-xl text-gray-300 font-medium">Pump Status: Unknown</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Weather Card -->
+    <section class="group backdrop-blur-xl bg-gradient-to-br from-dark-800/80 to-dark-700/60 border border-primary-500/20 rounded-3xl p-8 shadow-2xl hover:shadow-primary-500/10 transition-all duration-500 hover:scale-[1.02]" id="weather">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold text-white flex items-center space-x-3">
+          <span class="text-4xl">🌤️</span>
+          <span>Weather</span>
+        </h2>
+      </div>
+      
+      <div class="grid grid-cols-2 gap-6">
+        <div class="text-center p-6 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-2xl border border-orange-500/30">
+          <div class="text-3xl mb-2">🌡️</div>
+          <div class="text-2xl font-bold text-orange-400" id="temperature">--</div>
+          <div class="text-sm text-gray-400">Temperature (°C)</div>
+        </div>
+        <div class="text-center p-6 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-2xl border border-blue-500/30">
+          <div class="text-3xl mb-2">💨</div>
+          <div class="text-2xl font-bold text-blue-400" id="humidity">--</div>
+          <div class="text-sm text-gray-400">Humidity (%)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Light Sensor Card -->
+    <section class="group backdrop-blur-xl bg-gradient-to-br from-dark-800/80 to-dark-700/60 border border-primary-500/20 rounded-3xl p-8 shadow-2xl hover:shadow-primary-500/10 transition-all duration-500 hover:scale-[1.02]" id="light">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold text-white flex items-center space-x-3">
+          <span class="text-4xl">💡</span>
+          <span>Light Sensor</span>
+        </h2>
+      </div>
+      
+      <div class="text-center p-8 bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-2xl border border-yellow-500/30">
+        <div class="text-6xl mb-4">☀️</div>
+        <div class="text-2xl font-bold text-yellow-400 mb-2" id="light-status">--</div>
+        <div class="text-sm text-gray-400">Current Light Condition</div>
+      </div>
+    </section>
+
+    <!-- Camera Card -->
+    <section class="group backdrop-blur-xl bg-gradient-to-br from-dark-800/80 to-dark-700/60 border border-primary-500/20 rounded-3xl p-8 shadow-2xl hover:shadow-primary-500/10 transition-all duration-500 hover:scale-[1.02]" id="camera">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold text-white flex items-center space-x-3">
+          <span class="text-4xl">📹</span>
+          <span>Live Camera Feed</span>
+        </h2>
+        <div class="flex items-center space-x-2">
+          <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+          <span class="text-sm text-red-400 font-medium">LIVE</span>
+        </div>
+      </div>
+      
+      <div class="relative overflow-hidden rounded-2xl border border-gray-600">
+        <img src="http://<ESP32-CAM-IP>/stream" alt="Camera Stream" class="w-full h-auto" />
+        <div class="absolute inset-0 bg-gradient-to-t from-dark-900/50 to-transparent pointer-events-none"></div>
+      </div>
+    </section>
+
+    <!-- Security Card -->
+    <section class="group backdrop-blur-xl bg-gradient-to-br from-dark-800/80 to-dark-700/60 border border-primary-500/20 rounded-3xl p-8 shadow-2xl hover:shadow-primary-500/10 transition-all duration-500 hover:scale-[1.02]" id="security">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold text-white flex items-center space-x-3">
+          <span class="text-4xl">🛡️</span>
+          <span>Security</span>
+        </h2>
+        <div class="px-4 py-2 bg-green-500/20 text-green-400 rounded-full text-sm font-medium">
+          Active
+        </div>
+      </div>
+      
+      <div class="text-center p-8 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl border border-purple-500/30">
+        <div class="text-6xl mb-4">👁️</div>
+        <div class="text-lg text-gray-300 mb-2">Last Motion Detected:</div>
+        <div class="text-xl font-bold text-purple-400" id="last-motion">--</div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="backdrop-blur-xl bg-gradient-to-br from-dark-800/80 to-dark-700/60 border border-primary-500/20 rounded-3xl p-12 shadow-2xl" id="about">
+      <div class="text-center mb-12">
+        <h1 class="text-5xl font-bold bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 bg-clip-text text-transparent mb-6 flex items-center justify-center space-x-4">
+          <span class="text-6xl">👩‍💻</span>
+          <span>About Us</span>
+        </h1>
+        <p class="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+          We are a passionate team from NIBM dedicated to transforming traditional agriculture through real-time smart farming technologies. Agri-Bot is our capstone project for a sustainable future.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="group text-center">
+          <div class="relative mb-6">
+            <img src="assets/images/jayamal_aiya.jpg" alt="Jayamal" class="w-32 h-32 mx-auto rounded-full object-cover border-4 border-primary-500/50 shadow-2xl group-hover:border-primary-400 transition-all duration-300" />
+            <div class="absolute -inset-2 bg-gradient-to-r from-primary-500/20 to-primary-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-75 transition-opacity duration-500"></div>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2">Jayamal</h3>
+          <p class="text-primary-400 font-medium">Team Lead</p>
+        </div>
+        
+        <div class="group text-center">
+          <div class="relative mb-6">
+            <img src="assets/images/pooki_akki.jpg" alt="Poornima" class="w-32 h-32 mx-auto rounded-full object-cover border-4 border-primary-500/50 shadow-2xl group-hover:border-primary-400 transition-all duration-300" />
+            <div class="absolute -inset-2 bg-gradient-to-r from-primary-500/20 to-primary-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-75 transition-opacity duration-500"></div>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2">Poornima</h3>
+          <p class="text-primary-400 font-medium">Hardware Engineer</p>
+        </div>
+        
+        <div class="group text-center">
+          <div class="relative mb-6">
+            <img src="assets/images/mihi.jpg" alt="Mihiranga" class="w-32 h-32 mx-auto rounded-full object-cover border-4 border-primary-500/50 shadow-2xl group-hover:border-primary-400 transition-all duration-300" />
+            <div class="absolute -inset-2 bg-gradient-to-r from-primary-500/20 to-primary-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-75 transition-opacity duration-500"></div>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2">Mihiranga</h3>
+          <p class="text-primary-400 font-medium">Software Developer</p>
+        </div>
+        
+        <div class="group text-center">
+          <div class="relative mb-6">
+            <img src="assets/images/me.jpg" alt="Malith" class="w-32 h-32 mx-auto rounded-full object-cover border-4 border-primary-500/50 shadow-2xl group-hover:border-primary-400 transition-all duration-300" />
+            <div class="absolute -inset-2 bg-gradient-to-r from-primary-500/20 to-primary-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-75 transition-opacity duration-500"></div>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2">Malith</h3>
+          <p class="text-primary-400 font-medium">IoT Specialist</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-20 py-12 bg-gradient-to-r from-dark-900 to-dark-800 border-t border-primary-500/20">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <div class="flex items-center justify-center space-x-4 mb-6">
+        <img src="assets/images/agri-bot_logo.png" alt="Agri-Bot Logo" class="w-10 h-10 rounded-full border-2 border-primary-500" />
+        <span class="text-2xl font-bold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
+          Agri-Bot
+        </span>
+      </div>
+      <p class="text-gray-400 text-lg">&copy; 2025 Agri-Bot Team NIBM. All rights reserved.</p>
+      <div class="mt-4 flex justify-center space-x-6">
+        <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
+        <div class="w-2 h-2 bg-primary-400 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+        <div class="w-2 h-2 bg-primary-300 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Note: Firebase is now handled by React components -->
+
+   <script>
+    window.addEventListener("load", () => {
+      const loader = document.querySelector(".loader-wrapper");
+      loader.style.opacity = "0";
+      loader.style.transition = "opacity 2s ease";
+      setTimeout(() => loader.style.display = "none", 700);
+    });
+  </script>
+</body>
+</html>

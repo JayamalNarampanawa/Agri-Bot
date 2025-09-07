@@ -1,0 +1,110 @@
+
+/* Custom styles to complement Tailwind */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom animations and effects */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(34, 197, 94, 0.6); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Custom gauge styling */
+.gauge-container {
+  perspective: 1000px;
+}
+
+#moisture-gauge {
+  position: relative;
+  background: conic-gradient(#22c55e 0% 0%, #374151 0% 100%);
+  transition: all 0.5s ease;
+}
+
+#moisture-gauge::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  background: #0f172a;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.gauge-text {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #22c55e, #16a34a);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #16a34a, #15803d);
+}
+
+
+
+/* Responsive design enhancements */
+@media (max-width: 768px) {
+  nav .hidden {
+    display: none;
+  }
+  
+  .text-6xl {
+    font-size: 3rem;
+  }
+  
+  .text-7xl {
+    font-size: 4rem;
+  }
+}
+
+/* Custom utility classes */
+.glass-effect {
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gradient-border {
+  position: relative;
+  background: linear-gradient(45deg, #22c55e, #16a34a);
+  padding: 2px;
+  border-radius: 1rem;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: #1e293b;
+  border-radius: calc(1rem - 2px);
+}
