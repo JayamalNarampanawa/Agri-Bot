@@ -1,27 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Thermometer, Droplets } from 'lucide-react';
+import { database } from '../firebase/config';
+import { ref, onValue, off } from 'firebase/database';
 
 const Weather = () => {
   const [temperature, setTemperature] = useState('--');
   const [humidity, setHumidity] = useState('--');
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.db) {
-      const weatherRef = window.db.ref("/weather");
-      weatherRef.on("value", snapshot => {
-        const weather = snapshot.val();
-        if (weather) {
-          setTemperature(weather.temperature ?? '--');
-          setHumidity(weather.humidity ?? '--');
-        } else {
-          setTemperature('--');
-          setHumidity('--');
-        }
-      });
-
-      return () => weatherRef.off();
-    }
+    // Note: Weather data is not currently being sent by Arduino
+    // This component shows placeholder data until weather sensors are added
+    console.log('Weather component loaded - no data source available');
+    setTemperature('--');
+    setHumidity('--');
   }, []);
 
   return (

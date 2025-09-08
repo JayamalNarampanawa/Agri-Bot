@@ -1,4 +1,7 @@
-// Firebase configuration - keeping your existing script.js logic intact
+import { initializeApp } from 'firebase/app';
+import { getDatabase } from 'firebase/database';
+
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCvvvs04KJ0M-OxbldlV78-yxOVJyhAnCE",
   authDomain: "agri-bot-17548.firebaseapp.com",
@@ -9,10 +12,9 @@ const firebaseConfig = {
   appId: "1:437600300267:web:67baad95b4416cdc2ce2ae"
 };
 
-// Initialize Firebase (using global firebase from CDN)
-if (typeof window !== 'undefined' && window.firebase) {
-  window.firebase.initializeApp(firebaseConfig);
-  window.db = window.firebase.database();
-}
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
+export { database };
 export default firebaseConfig;

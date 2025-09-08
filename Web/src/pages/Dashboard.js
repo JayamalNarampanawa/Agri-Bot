@@ -7,6 +7,7 @@ import SoilMoisture from '../components/SoilMoisture';
 import Irrigation from '../components/Irrigation';
 import Weather from '../components/Weather';
 import LightSensor from '../components/LightSensor';
+import Tank from '../components/Tank';
 import Camera from '../components/Camera';
 import Security from '../components/Security';
 import About from '../components/About';
@@ -38,6 +39,7 @@ const Dashboard = () => {
         <Irrigation />
         <Weather />
         <LightSensor />
+        <Tank />
         <Camera />
         <Security />
         <About />

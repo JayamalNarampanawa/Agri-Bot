@@ -14,6 +14,7 @@ const Navigation = () => {
     { href: '#irrigation', icon: 'fas fa-tint', label: 'Irrigation', color: 'text-blue-400' },
     { href: '#weather', icon: 'fas fa-cloud-sun', label: 'Weather', color: 'text-yellow-400' },
     { href: '#light', icon: 'fas fa-lightbulb', label: 'Light', color: 'text-amber-400' },
+    { href: '#tank', icon: 'fas fa-tint', label: 'Tank', color: 'text-cyan-400' },
     { href: '#camera', icon: 'fas fa-video', label: 'Camera', color: 'text-red-400' },
     { href: '#security', icon: 'fas fa-shield-alt', label: 'Security', color: 'text-purple-400' },
     { href: '#about', icon: 'fas fa-users', label: 'About', color: 'text-primary-400' },

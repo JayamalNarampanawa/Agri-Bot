@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Eye, Clock, AlertTriangle } from 'lucide-react';
+import { database } from '../firebase/config';
+import { ref, onValue, off } from 'firebase/database';
 
 const Security = () => {
   const [lastMotion, setLastMotion] = useState('--');
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.db) {
-      const motionRef = window.db.ref("/security/last_motion_time");
-      motionRef.on("value", snapshot => {
-        const motionTime = snapshot.val();
-        setLastMotion(motionTime || '--');
-      });
+    const motionRef = ref(database, "/security/last_motion_time");
+    
+    const unsubscribe = onValue(motionRef, (snapshot) => {
+      const motionTime = snapshot.val();
+      console.log('Security motion data received:', motionTime); // Debug log
+      setLastMotion(motionTime || '--');
+    }, (error) => {
+      console.error('Error reading security motion data:', error);
+      setLastMotion('--');
+    });
 
-      return () => motionRef.off();
-    }
+    return () => off(motionRef, 'value', unsubscribe);
   }, []);
 
   const isRecentMotion = () => {

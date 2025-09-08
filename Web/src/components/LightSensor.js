@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sun, Moon, Lightbulb } from 'lucide-react';
+import { database } from '../firebase/config';
+import { ref, onValue, off } from 'firebase/database';
 
 const LightSensor = () => {
   const [isDark, setIsDark] = useState(null);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.db) {
-      const lightRef = window.db.ref("/isDark");
-      lightRef.on("value", snapshot => {
-        const darkValue = snapshot.val();
-        setIsDark(darkValue);
-      });
+    const lightRef = ref(database, "/light/state");
+    
+    const unsubscribe = onValue(lightRef, (snapshot) => {
+      const lightState = snapshot.val();
+      console.log('Light sensor data received:', lightState); // Debug log
+      // Convert "DARK"/"BRIGHT" to boolean for compatibility
+      setIsDark(lightState === "DARK");
+    }, (error) => {
+      console.error('Error reading light sensor data:', error);
+      setIsDark(null);
+    });
 
-      return () => lightRef.off();
-    }
+    return () => off(lightRef, 'value', unsubscribe);
   }, []);
 
   const getLightStatus = () => {
